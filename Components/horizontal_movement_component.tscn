@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://nlc8eitone38"]
+
+[ext_resource type="Script" path="res://Scripts/HorizontalMovementComponent.gd" id="1_bwj3s"]
+
+[node name="HorizontalMovementComponent" type="Node"]
+script = ExtResource("1_bwj3s")
