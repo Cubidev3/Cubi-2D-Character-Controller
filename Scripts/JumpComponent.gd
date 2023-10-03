@@ -2,7 +2,6 @@ class_name JumpComponent
 extends Node
 
 @export var velocity: VelocityComponent
-@export var info: JumpInfo
 
 var is_in_apex: bool = false
 var is_low_jumping: bool = false
@@ -12,9 +11,10 @@ signal fell_off_apex
 
 var apex_timer: float = 0
 	
-func apply_gravity(delta: float):
+func apply_gravity(info: JumpInfo, delta: float):
 	if is_low_jumping:
 		velocity.accelerate_y(info.get_low_jump_gravity(), delta)
+		is_low_jumping = velocity.going_up()
 		return
 	
 	if is_in_apex:
@@ -26,12 +26,12 @@ func apply_gravity(delta: float):
 		velocity.accelerate_y(info.get_up_gravity(), delta)
 		
 		if not velocity.going_up():
-			start_apex()
+			start_apex(info)
 		
 	else:
 		velocity.accelerate_y(info.get_down_gravity(), delta)
 	
-func start_apex():
+func start_apex(info: JumpInfo):
 	is_in_apex = true
 	apex_timer = info.get_time_in_apex()
 	reached_apex.emit()
@@ -56,7 +56,7 @@ func start_low_jump():
 	if is_in_apex:
 		end_apex()
 	
-func jump():
+func jump(info: JumpInfo):
 	velocity.set_velocity_y(-info.get_impulse())
 	
 	is_low_jumping = false
@@ -70,5 +70,11 @@ func ground():
 	if is_in_apex:
 		end_apex()
 
-func in_apex():
+func going_up() -> bool:
+	return velocity.going_up()
+
+func in_apex() -> bool:
 	return is_in_apex
+	
+func falling() -> bool:
+	return velocity.going_down() and not is_in_apex

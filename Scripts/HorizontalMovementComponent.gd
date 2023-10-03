@@ -2,9 +2,8 @@ class_name HorizontalMovementComponent
 extends Node
 
 @export var velocity: VelocityComponent
-@export var info: HorizontalMovementInfo
 	
-func move(direction: int, delta: float):
+func move(info: HorizontalMovementInfo, direction: int, delta: float):
 	direction = sign(direction)
 	
 	if direction == 0:

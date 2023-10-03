@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bavrf7jwmpxli"]
+[gd_scene load_steps=14 format=3 uid="uid://bavrf7jwmpxli"]
 
 [ext_resource type="Script" path="res://Exemple/Player.gd" id="1_jmfoo"]
 [ext_resource type="Texture2D" uid="uid://ch3vippeyfvp8" path="res://icon.svg" id="2_pltxh"]
@@ -10,56 +10,48 @@
 
 [sub_resource type="Resource" id="Resource_hy4sx"]
 script = ExtResource("5_gm3sm")
-max_speed = 550.0
+max_speed = 600.0
 initial_speed = 220.0
-time_to_max_speed = 0.18
+time_to_max_speed = 0.16
 time_to_turn_around = 0.04
 time_to_stop = 0.1
 
 [sub_resource type="Resource" id="Resource_ioica"]
 script = ExtResource("5_gm3sm")
-max_speed = 550.0
+max_speed = 600.0
 initial_speed = 0.0
-time_to_max_speed = 0.64
-time_to_turn_around = 0.36
+time_to_max_speed = 0.32
+time_to_turn_around = 0.24
 time_to_stop = 0.86
 
 [sub_resource type="Resource" id="Resource_egkl2"]
 script = ExtResource("5_gm3sm")
 max_speed = 620.0
 initial_speed = 0.0
-time_to_max_speed = 0.28
+time_to_max_speed = 0.24
 time_to_turn_around = 0.2
 time_to_stop = 0.86
 
 [sub_resource type="Resource" id="Resource_jlrrl"]
 script = ExtResource("7_dwjex")
-height = 160.0
-min_height = 80.0
-heigth_lost_in_apex = 5.0
-time_to_height = 0.38
-time_to_ground = 0.29
-time_in_apex = 0.08
+height = 180.0
+min_height = 120.0
+heigth_lost_in_apex = 3.0
+time_to_height = 0.35
+time_to_ground = 0.26
+time_in_apex = 0.03
+
+[sub_resource type="Resource" id="Resource_hionw"]
+script = ExtResource("7_dwjex")
+height = 30.0
+min_height = 15.0
+heigth_lost_in_apex = 1.0
+time_to_height = 0.16
+time_to_ground = 0.13
+time_in_apex = 0.02
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdgix"]
 size = Vector2(64, 64)
-
-[sub_resource type="Resource" id="Resource_hlw0c"]
-script = ExtResource("5_gm3sm")
-max_speed = 264.0
-initial_speed = 64.0
-time_to_max_speed = 0.2
-time_to_turn_around = 0.06
-time_to_stop = 0.12
-
-[sub_resource type="Resource" id="Resource_uthlc"]
-script = ExtResource("7_dwjex")
-height = 180.0
-min_height = 100.0
-heigth_lost_in_apex = 5.0
-time_to_height = 0.4
-time_to_ground = 0.3
-time_in_apex = 0.08
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("horizontal_movement", "jump_component", "velocity_component")]
 collision_mask = 2
@@ -71,6 +63,8 @@ ground_movement = SubResource("Resource_hy4sx")
 aerial_movement = SubResource("Resource_ioica")
 in_apex_movement = SubResource("Resource_egkl2")
 jump_info = SubResource("Resource_jlrrl")
+dive_move_speed = 750.0
+dive_info = SubResource("Resource_hionw")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -84,8 +78,6 @@ body = NodePath("..")
 
 [node name="HorizontalMovementComponent" parent="." node_paths=PackedStringArray("velocity") instance=ExtResource("4_f0nyh")]
 velocity = NodePath("../VelocityComponent")
-info = SubResource("Resource_hlw0c")
 
 [node name="JumpComponent" parent="." node_paths=PackedStringArray("velocity") instance=ExtResource("5_31yek")]
 velocity = NodePath("../VelocityComponent")
-info = SubResource("Resource_uthlc")
