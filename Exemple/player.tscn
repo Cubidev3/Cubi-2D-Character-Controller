@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bavrf7jwmpxli"]
+[gd_scene load_steps=17 format=3 uid="uid://bavrf7jwmpxli"]
 
 [ext_resource type="Script" path="res://Exemple/Player.gd" id="1_jmfoo"]
 [ext_resource type="Texture2D" uid="uid://ch3vippeyfvp8" path="res://icon.svg" id="2_pltxh"]
@@ -12,9 +12,9 @@
 script = ExtResource("5_gm3sm")
 max_speed = 600.0
 initial_speed = 220.0
-time_to_max_speed = 0.16
-time_to_turn_around = 0.04
-time_to_stop = 0.1
+time_to_max_speed = 0.2
+time_to_turn_around = 0.1
+time_to_stop = 0.12
 
 [sub_resource type="Resource" id="Resource_ioica"]
 script = ExtResource("5_gm3sm")
@@ -41,14 +41,39 @@ time_to_height = 0.35
 time_to_ground = 0.26
 time_in_apex = 0.03
 
+[sub_resource type="Resource" id="Resource_kr4n0"]
+script = ExtResource("5_gm3sm")
+max_speed = 750.0
+initial_speed = 700.0
+time_to_max_speed = 0.08
+time_to_turn_around = 0.5
+time_to_stop = 0.5
+
 [sub_resource type="Resource" id="Resource_hionw"]
 script = ExtResource("7_dwjex")
-height = 30.0
-min_height = 15.0
+height = 15.0
+min_height = 10.0
 heigth_lost_in_apex = 1.0
-time_to_height = 0.16
-time_to_ground = 0.13
+time_to_height = 0.12
+time_to_ground = 0.1
 time_in_apex = 0.02
+
+[sub_resource type="Resource" id="Resource_0obes"]
+script = ExtResource("5_gm3sm")
+max_speed = 400.0
+initial_speed = 120.0
+time_to_max_speed = 0.2
+time_to_turn_around = 0.06
+time_to_stop = 0.12
+
+[sub_resource type="Resource" id="Resource_a4sme"]
+script = ExtResource("7_dwjex")
+height = 300.0
+min_height = 180.0
+heigth_lost_in_apex = 3.0
+time_to_height = 0.5
+time_to_ground = 0.4
+time_in_apex = 0.04
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdgix"]
 size = Vector2(64, 64)
@@ -63,8 +88,10 @@ ground_movement = SubResource("Resource_hy4sx")
 aerial_movement = SubResource("Resource_ioica")
 in_apex_movement = SubResource("Resource_egkl2")
 jump_info = SubResource("Resource_jlrrl")
-dive_move_speed = 750.0
+dive_move = SubResource("Resource_kr4n0")
 dive_info = SubResource("Resource_hionw")
+side_flip_movement = SubResource("Resource_0obes")
+side_flip_info = SubResource("Resource_a4sme")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
